@@ -31,7 +31,7 @@ char HexCharacterToByte(char const hexDigit) {
 void HexStringToBytes(char const *input, unsigned char *output){
     int n = strlen(input);
     if (n%2 != 0){
-        fprintf(stderr, "Input string has uneven length.");
+        fprintf(stderr, "Input string has uneven length.\n");
         return;
     }
     for (int i=0; i<n/2; ++i){
@@ -73,8 +73,8 @@ void LeByteToMPZ(unsigned char const *in, int const len, mpz_t out){
 }
 
 
-void MPZToLeHexString(mpz_t in, char *out, int const len){
-    int len2 = len*2;
+void MPZToLeHexString(mpz_t in, char *out, int const n){
+    int len2 = n*2;
     int size = (int)mpz_sizeinbase(in, 16);
     char hexString[size+2];
 
@@ -129,19 +129,4 @@ unsigned int RotL(unsigned int const n, int const d){
     int l = 8 * sizeof(n);
     int s = d % (8 * sizeof(n));
     return (n << s) | (n >> (l - s));
-}
-
-void getRS(unsigned char const *key, unsigned char *r, unsigned char *s){
-    for (int i=0; i<16; ++i){
-        r[i] = key[i];
-        s[i] = key[16 + i];
-    }
-    // Clamp the resulting r
-    r[3] &= 15;
-    r[7] &= 15;
-    r[11] &= 15;
-    r[15] &= 15;
-    r[4] &= 252;
-    r[8] &= 252;
-    r[12] &= 252;
 }

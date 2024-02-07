@@ -48,7 +48,7 @@ void UInt32ToLeByte(unsigned int const n, unsigned char *p);
 void UInt64ToLeByte(unsigned long long const n, unsigned char *p);
 
 /**
- * Converts an buffer of bytes stored in little endian to mpz_t integer.
+ * Converts a buffer of bytes stored in little endian to mpz_t integer.
  * @param in The input bytes buffer.
  * @param len The input buffer length.
  * @param out The output mpz_t integer.
@@ -59,9 +59,9 @@ void LeByteToMPZ(unsigned char const *in, int const len, mpz_t out);
  * Converts an mpz_t integer to it hexadecimal little endian representation.
  * @param in The input mpz_t integer.
  * @param out The output string.
- * @param len The length of the output string.
+ * @param n The output will represent n-byte integer.
  */
-void MPZToLeHexString(mpz_t in, char *out, int const len);
+void MPZToLeHexString(mpz_t in, char *out, int const n);
 
 /**
  * Reads n bytes from the file.
@@ -80,14 +80,3 @@ char *readNBytesFromFile(char const *filename, int const n, char const *type);
  * @example RotL(b1110, 2) returns b1011.
  */
 unsigned int RotL(unsigned int const n, int const d);
-
-/**
- * Splits the 32 bytes Key into two 16 bytes subkeys, and clamps r to
- * match RFC 8439 specifications.
- * @param key The input key.
- * @param r The buffer to write the clamped subkey r.
- * @param s The to write the subkey s.
- */
-void getRS(unsigned char const *key, unsigned char *r, unsigned char *s);
-
-
