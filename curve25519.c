@@ -1,8 +1,8 @@
 
 #include <gmp.h>
 
-#include "curve25519.h"
 #include "utils.h"
+#include "curve25519.h"
 
 
 void decodeLittleEndian(unsigned char const *b, int const bits, mpz_t out){
@@ -108,6 +108,8 @@ void cswap(int swap, mpz_t a, mpz_t b){
     mpz_and(dummy, mask, dummy);
     mpz_xor(a, a, dummy);
     mpz_xor(b, b, dummy);
+
+    mpz_clears(mask, dummy, NULL);
 }
 
 
